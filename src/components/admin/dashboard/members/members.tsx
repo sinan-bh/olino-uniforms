@@ -54,7 +54,7 @@ const MemberList: React.FC = () => {
   );
 
   return (
-    <div className="p-6">
+    <div className="mt-2 h-full">
       <div className="flex justify-between items-center mb-4">
         <div>
           <input
@@ -85,17 +85,16 @@ const MemberList: React.FC = () => {
           .map((member) => (
             <div
               key={member.id}
-              className="flex items-center justify-between p-4 border rounded-lg bg-black shadow-md"
+              className="flex items-center justify-between p-4  rounded-lg bg-gray-800 "
             >
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center mr-4">
-                  {/* Placeholder for member avatar */}
                   <span className="text-black">{member.name[0]}</span>
                 </div>
                 <div>
-                  <div className="font-semibold">{member.name}</div>
+                  <div className="font-semibold text-white">{member.name}</div>
                   <div className="text-sm text-white">{member.id}</div>
-                  <div className="text-sm">{member.project}</div>
+                  <div className="text-sm text-white">{member.project}</div>
                 </div>
               </div>
               <div>
