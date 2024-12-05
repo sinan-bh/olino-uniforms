@@ -6,36 +6,51 @@ import { mockData } from "@/const/data-set";
 const Works: React.FC = () => {
   const [isGridView, setIsGridView] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("all");
 
-  // Filter works based on school name
-  const filteredWorks = mockData.filter((work) =>
-    work.schoolName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredWorks = mockData.filter((work) => {
+    const matchesSearch = work.schoolName
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesStatus =
+      selectedStatus === "all" || work.status === selectedStatus;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div className="container p-4">
       <h1 className="text-2xl font-semibold text-white">Work Details</h1>
-      <div className="flex justify-between items-center mb-4 mt-3">
+      <div className="flex flex-wrap justify-between items-center mb-4 mt-3">
         <button
           onClick={() => setIsGridView(!isGridView)}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
         >
           {isGridView ? "Switch to List View" : "Switch to Grid View"}
         </button>
-        <div>
+        <div className="flex items-center gap-2">
           <input
             type="text"
             placeholder="Search by School Name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-800 text-white placeholder-gray-400 hover:bg-gray-900"
           />
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="p-2 rounded bg-gray-800 text-white hover:bg-gray-900"
+          >
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="progressing">Progressing</option>
+            <option value="pending">Pending</option>
+          </select>
         </div>
       </div>
       <div
         className={`grid gap-4 ${
           isGridView ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : ""
-        } overflow-y-auto`}
+        } max-h-[75vh] overflow-y-auto`}
       >
         {filteredWorks.length > 0 ? (
           filteredWorks.map((work) => (
@@ -43,21 +58,35 @@ const Works: React.FC = () => {
               key={work.id}
               className={`p-4 rounded-lg ${
                 isGridView ? "bg-gray-800" : "bg-gray-800"
-              }`}
+              } `}
             >
               <h2 className="text-lg font-medium text-white">
                 {work.schoolName}
               </h2>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-200 pt-2 text-sm">
                 Address: {work.schoolAddress}
               </p>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-200 pt-1 text-sm">
                 Uniform Color:{" "}
                 <span className="font-semibold">{work.uniformColor}</span>
               </p>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-200 pt-1 text-sm">
                 Assigned Member ID:{" "}
                 <span className="font-semibold">{work.assignedMemberId}</span>
+              </p>
+              <p className="text-gray-200 pt-1 text-sm">
+                Status:{" "}
+                <span
+                  className={`font-semibold capitalize ${
+                    work.status === "pending"
+                      ? "text-yellow-500"
+                      : work.status === "completed"
+                      ? "text-green-500"
+                      : "text-blue-500"
+                  }`}
+                >
+                  {work.status}
+                </span>
               </p>
             </div>
           ))

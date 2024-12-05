@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button"; // Adjust the import path as needed
+import { Button } from "@/components/ui/button";
 
 const AddMemberPopup: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,12 +11,10 @@ const AddMemberPopup: React.FC = () => {
   };
 
   const handleAddMember = () => {
-    // Handle member submission logic here
     console.log("Adding Member:", {
       name: memberName,
       work: memberWork,
     });
-    // Reset fields
     setMemberName("");
     setMemberWork("");
     toggleModal();
@@ -24,12 +22,14 @@ const AddMemberPopup: React.FC = () => {
 
   return (
     <div className="p-4">
-      {/* Add Member Button */}
-      <Button className="border" variant="default" onClick={toggleModal}>
+      <Button
+        className="bg-gray-800 hover:bg-gray-900 text-gray-400"
+        variant="default"
+        onClick={toggleModal}
+      >
         Add Member
       </Button>
 
-      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white p-6 rounded-lg w-[90%] max-w-md">
@@ -41,7 +41,6 @@ const AddMemberPopup: React.FC = () => {
               }}
               className="space-y-4"
             >
-              {/* Member Name */}
               <div>
                 <label
                   htmlFor="memberName"
@@ -60,7 +59,6 @@ const AddMemberPopup: React.FC = () => {
                 />
               </div>
 
-              {/* Member Work */}
               <div>
                 <label
                   htmlFor="memberWork"
@@ -79,7 +77,6 @@ const AddMemberPopup: React.FC = () => {
                 />
               </div>
 
-              {/* Action Buttons */}
               <div className="flex justify-end space-x-2">
                 <Button variant="ghost" onClick={toggleModal}>
                   Cancel

@@ -3,7 +3,7 @@ import { FaTachometerAlt, FaTasks, FaUsers, FaCog } from "react-icons/fa";
 
 const Sidebar: React.FC = () => {
   return (
-    <div className="w-1/4 bg-gray-800 text-white p-6">
+    <div className="w-1/6 bg-gray-800 text-white p-6 z-10">
       <h2 className="text-2xl font-bold mb-8">Olino Uniforms</h2>
       <ul className="space-y-6">
         <li className="flex items-center space-x-2">

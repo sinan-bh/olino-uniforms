@@ -60,7 +60,7 @@ const MemberList: React.FC = () => {
           <input
             type="text"
             placeholder="Search members"
-            className="px-4 py-2 border border-gray-300 rounded-full text-black"
+            className="px-4 py-2 bg-gray-800 hover:bg-gray-900 rounded-md text-black"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -68,9 +68,9 @@ const MemberList: React.FC = () => {
         <div>
           <button
             onClick={() => setView(view === "list" ? "grid" : "list")}
-            className="px-4 py-2 bg-blue-500 text-white rounded-full"
+            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900"
           >
-            Toggle View
+            {view === "grid" ? "Grid View" : "List View"}
           </button>
         </div>
       </div>
@@ -116,7 +116,7 @@ const MemberList: React.FC = () => {
         <div className="mt-4 text-center">
           <button
             onClick={() => setShowAll(true)}
-            className="px-4 py-2 bg-blue-500 text-white rounded-full"
+            className="px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-full"
           >
             Show More
           </button>

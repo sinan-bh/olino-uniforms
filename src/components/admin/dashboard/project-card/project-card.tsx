@@ -21,14 +21,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, progress }) => {
           <div>Members {10}</div>
           <div>Works {23}</div>
         </div>
-        <div>
+        <Link href={`/admin/profiles`}>
           <div className="w-full h-10 rounded-xl flex justify-center items-center border my-4 hover:bg-teal-500 hover:border">
-            pending Works
+            See All Members
           </div>
-        </div>
+        </Link>
         <Link href={"/admin/works"}>
           <div className="bg-teal-500  text-white text-center px-4 py-2 rounded-xl hover:bg-transparent hover:border">
-            See All Project
+            See All Works
           </div>
         </Link>
       </div>

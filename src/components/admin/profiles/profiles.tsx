@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { mockMembers, Member } from "@/const/data-set";
 import AddMemberPopup from "./add-members";
+import Link from "next/link";
 
 const Members: React.FC = () => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
@@ -39,17 +40,18 @@ const Members: React.FC = () => {
               placeholder="Search by Name or Mid"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 rounded bg-gray-800 text-white placeholder-gray-400 "
             />
           </div>
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-y-auto">
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-[75vh]  overflow-y-auto">
         {filteredMembers.length > 0 ? (
           filteredMembers.map((member) => (
-            <div
+            <Link
+              href={`/admin/profiles/${member.memberId}`}
               key={member.id}
-              className="p-4 rounded-lg shadow-md border bg-gray-800"
+              className="p-4 rounded-lg   bg-gray-800"
             >
               <h2 className="text-lg font-medium text-white">{member.name}</h2>
               <p className="text-gray-400 text-sm">
@@ -71,7 +73,7 @@ const Members: React.FC = () => {
               >
                 {member.isBlocked ? "Unblock" : "Block"}
               </button>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="text-gray-400 text-sm col-span-full">
