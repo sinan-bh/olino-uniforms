@@ -54,13 +54,13 @@ const MemberList: React.FC = () => {
   );
 
   return (
-    <div className="p-6">
+    <div className="mt-2 h-full">
       <div className="flex justify-between items-center mb-4">
         <div>
           <input
             type="text"
             placeholder="Search members"
-            className="px-4 py-2 border border-gray-300 rounded-full text-black"
+            className="px-4 py-2 bg-gray-800 hover:bg-gray-900 rounded-md text-black"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -68,9 +68,9 @@ const MemberList: React.FC = () => {
         <div>
           <button
             onClick={() => setView(view === "list" ? "grid" : "list")}
-            className="px-4 py-2 bg-blue-500 text-white rounded-full"
+            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900"
           >
-            Toggle View
+            {view === "grid" ? "Grid View" : "List View"}
           </button>
         </div>
       </div>
@@ -85,17 +85,16 @@ const MemberList: React.FC = () => {
           .map((member) => (
             <div
               key={member.id}
-              className="flex items-center justify-between p-4 border rounded-lg bg-black shadow-md"
+              className="flex items-center justify-between p-4  rounded-lg bg-gray-800 "
             >
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center mr-4">
-                  {/* Placeholder for member avatar */}
                   <span className="text-black">{member.name[0]}</span>
                 </div>
                 <div>
-                  <div className="font-semibold">{member.name}</div>
+                  <div className="font-semibold text-white">{member.name}</div>
                   <div className="text-sm text-white">{member.id}</div>
-                  <div className="text-sm">{member.project}</div>
+                  <div className="text-sm text-white">{member.project}</div>
                 </div>
               </div>
               <div>
@@ -117,7 +116,7 @@ const MemberList: React.FC = () => {
         <div className="mt-4 text-center">
           <button
             onClick={() => setShowAll(true)}
-            className="px-4 py-2 bg-blue-500 text-white rounded-full"
+            className="px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-full"
           >
             Show More
           </button>
