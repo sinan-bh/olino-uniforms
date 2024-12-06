@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 
 export default function Home() {
@@ -29,12 +30,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r bg-gradient-to-r from-blue-400 via-blue-200 to-gray-200  flex flex-col justify-center items-center text-white">
+    <div className="bg-gradient-to-r from-blue-400 via-blue-200 to-gray-200  flex flex-col justify-center items-center text-white">
       <div className="h-screen flex flex-col items-center justify-center">
         <div className="flex justify-between px-14 items-center">
           <header className="text-center mb-12">
             <h1 className="text-5xl font-bold leading-tight">
-              Welcome to <span className="text-yellow-300">Olino Uniforms</span>
+              <span className="bg-gradient-to-r from-green-400 to-green-900 bg-clip-text text-transparent">
+                Olino Uniforms
+              </span>
             </h1>
             <p className="text-xl mt-4">
               Your trusted partner in quality uniforms for every occasion.
@@ -52,12 +55,12 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-12">
-          <a
-            href="/signin"
-            className="px-8 py-3 bg-dark text-white font-bold text-xl rounded-full shadow-lg hover:bg-gray-700 transition-all"
+          <Link
+            href={`/signin`}
+            className="inline-block px-8 py-3 mt-6 bg-white text-green-600 font-semibold rounded-full shadow-md hover:bg-gray-100 transition"
           >
-            Login <span className="animate-move-right">{">>"}</span>
-          </a>
+            View Works
+          </Link>
         </div>
       </div>
 

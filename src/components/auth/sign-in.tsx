@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     if (email === adminUserName && password === adminUserPassword) {
       router.push("/admin/home");
     } else if (email === userName && password === userPassword) {
-      router.push(`/M/${MId}`);
+      router.push(`/M/${MId}/home`);
     } else {
       setErrorMessage("Invalid email or password.");
     }

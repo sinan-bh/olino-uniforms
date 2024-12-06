@@ -11,7 +11,7 @@ interface WorkDetail {
   status: string;
   shippedDate?: string;
   deliveredDate?: string;
-  creditedAmount?: number;
+  creditedAmount?: string;
 }
 
 interface MemberDetails {
