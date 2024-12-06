@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex bg-black w-full h-full">
       <div className="flex-1 bg-dark-100 p-8">
-        <div className="text-white text-3xl font-semibold mb-8 ">
+        <div className="text-white text-3xl font-semibold mb-8 mt-10 sm:mt-0">
           Olino Uniforms
         </div>
 

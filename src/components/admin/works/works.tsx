@@ -20,7 +20,9 @@ const Works: React.FC = () => {
 
   return (
     <div className="container p-4">
-      <h1 className="text-2xl font-semibold text-white">Work Details</h1>
+      <h1 className="text-2xl font-semibold text-white sm:mt-0 mt-14">
+        Work Details
+      </h1>
       <div className="flex flex-wrap justify-between items-center mb-4 mt-3">
         <button
           onClick={() => setIsGridView(!isGridView)}

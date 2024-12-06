@@ -50,7 +50,7 @@ const Members: React.FC = () => {
   return (
     <div className="container p-4 h-screen bg-black">
       <div>
-        <h1 className="text-2xl font-semibold mb-4 text-white">
+        <h1 className="text-2xl font-semibold mb-4 text-white mt-14 sm:mt-0">
           Member Profiles
         </h1>
         <div className="flex justify-between items-center gap-4 mb-4">

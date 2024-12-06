@@ -53,6 +53,7 @@ const AddWorkForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    alert("work assigned");
   };
 
   return (
