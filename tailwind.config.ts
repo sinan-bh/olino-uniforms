@@ -61,9 +61,14 @@ export default {
             transform: "translateY(-20px)",
           },
         },
+        moveRight: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(10px)" },
+        },
       },
       animation: {
         float: "float 3s ease-in-out infinite",
+        "move-right": "moveRight 2s linear infinite",
       },
       borderRadius: {
         lg: "var(--radius)",

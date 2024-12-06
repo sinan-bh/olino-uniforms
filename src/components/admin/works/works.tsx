@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { mockData } from "@/const/data-set";
+import Link from "next/link";
 
 const Works: React.FC = () => {
   const [isGridView, setIsGridView] = useState(true);
@@ -54,11 +55,12 @@ const Works: React.FC = () => {
       >
         {filteredWorks.length > 0 ? (
           filteredWorks.map((work) => (
-            <div
+            <Link
+              href={`/admin/works/${work.id}`}
               key={work.id}
               className={`p-4 rounded-lg ${
                 isGridView ? "bg-gray-800" : "bg-gray-800"
-              } `}
+              }`}
             >
               <h2 className="text-lg font-medium text-white">
                 {work.schoolName}
@@ -88,7 +90,7 @@ const Works: React.FC = () => {
                   {work.status}
                 </span>
               </p>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="text-gray-400 text-sm col-span-full">
