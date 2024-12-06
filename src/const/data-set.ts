@@ -1,6 +1,6 @@
 export interface Member {
   id: number;
-  memberId: string; // Example: "M1", "M2"
+  memberId: string;
   name: string;
   workAssigned: string[];
   isBlocked: boolean;
@@ -92,15 +92,15 @@ export const mockData: Work[] = [
     uniformColor: "Yellow",
     schoolName: "Blue Ridge Academy",
     schoolAddress: "101 Sun Street, Sunnydale",
-    assignedMemberId: "M6",
-    status: "completed",
+    assignedMemberId: "M1",
+    status: "pending",
   },
   {
     id: 7,
     uniformColor: "Yellow",
     schoolName: "Riverside Secondary School",
     schoolAddress: "101 Sun Street, Sunnydale",
-    assignedMemberId: "M7",
+    assignedMemberId: "M2",
     status: "completed",
   },
   {
@@ -116,7 +116,7 @@ export const mockData: Work[] = [
     uniformColor: "Yellow",
     schoolName: "Evergreen Primary",
     schoolAddress: "101 Sun Street, Sunnydale",
-    assignedMemberId: "M9",
+    assignedMemberId: "M1",
     status: "completed",
   },
 ];

@@ -1,6 +1,6 @@
 "use client";
 
-import { mockData, users, Work } from "@/const/data-set"; // Update with the actual path to your data file
+import { mockData, users, Work } from "@/const/data-set";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
@@ -31,18 +31,15 @@ const WorkDetails = () => {
 
   useEffect(() => {
     if (workId) {
-      // Fetch work details by id
       const selectedWork = mockData.find((work) => work.id === Number(workId));
       setWork(selectedWork || null);
 
-      // Fetch member details by assignedMemberId
       if (selectedWork) {
         const memberDetails = users.find(
           (user) => user.memberId === selectedWork.assignedMemberId
         );
 
         if (memberDetails) {
-          // Filter work details of the member to only include the matching workId
           const filteredWorkDetails = memberDetails.workDetails.filter(
             (workDetail) => workDetail.workId === Number(workId)
           );
@@ -59,21 +56,12 @@ const WorkDetails = () => {
     (a) => a.workId === Number(workId)
   );
 
-  //   if (!work || !assignedMember) {
-  //     return (
-  //       <div className="flex items-center justify-center h-screen">
-  //         <p className="text-lg text-gray-600">Loading...</p>
-  //       </div>
-  //     );
-  //   }
-
   return (
     <div className="p-4 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-center mb-6 text-white">
         Work Details
       </h1>
 
-      {/* Work Information */}
       <div className="border border-gray-300 rounded-lg p-6 mb-6 shadow-md bg-gray-800 text-white">
         <h2 className="text-xl font-semibold mb-4">Work Information</h2>
         <p className="mb-2">
@@ -103,7 +91,6 @@ const WorkDetails = () => {
         </p>
       </div>
 
-      {/* Assigned Member Information */}
       <div className="border border-gray-300 rounded-lg p-6 shadow-md bg-gray-800 text-white">
         <h2 className="text-xl font-semibold mb-4">Assigned Member</h2>
         <div className="flex items-center space-x-4 mb-4">
