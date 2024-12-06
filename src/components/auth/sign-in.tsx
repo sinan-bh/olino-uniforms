@@ -13,12 +13,17 @@ const Home: React.FC = () => {
 
   const adminUserName = process.env.NEXT_PUBLIC_ADMIN_USER_NAME || "";
   const adminUserPassword = process.env.NEXT_PUBLIC_ADMIN_USER_PASSWORD || "";
+  const userName = process.env.NEXT_PUBLIC_USER_NAME || "";
+  const userPassword = process.env.NEXT_PUBLIC_USER_PASSWORD || "";
+  const MId = process.env.NEXT_PUBLIC_MID || "";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (email === adminUserName && password === adminUserPassword) {
       router.push("/admin/home");
+    } else if (email === userName && password === userPassword) {
+      router.push(`/M/${MId}`);
     } else {
       setErrorMessage("Invalid email or password.");
     }
