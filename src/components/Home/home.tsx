@@ -59,7 +59,7 @@ export default function Home() {
             href={`/signin`}
             className="inline-block px-8 py-3 mt-6 bg-white text-green-600 font-semibold rounded-full shadow-md hover:bg-gray-100 transition"
           >
-            View Works
+            Login
           </Link>
         </div>
       </div>

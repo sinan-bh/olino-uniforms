@@ -38,15 +38,13 @@ const members = [
   },
   { id: "M9", name: "Chris K.", status: "On Hold", project: "Design Studio" },
   { id: "M10", name: "Emma S.", status: "In Progress", project: "UI/UX Team" },
-  // Add more members as needed
 ];
 
 const MemberList: React.FC = () => {
-  const [view, setView] = useState("list"); // 'list' or 'grid'
+  const [view, setView] = useState("list");
   const [searchTerm, setSearchTerm] = useState("");
   const [showAll, setShowAll] = useState(false);
 
-  // Filter members based on search term
   const filteredMembers = members.filter(
     (member) =>
       member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
