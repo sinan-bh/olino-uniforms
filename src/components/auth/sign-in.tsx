@@ -3,12 +3,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Home: React.FC = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const adminUserName = process.env.NEXT_PUBLIC_ADMIN_USER_NAME || "";
@@ -45,22 +47,26 @@ const Home: React.FC = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 text-gray-700 bg-white border border-black rounded-full focus:outline-none focus:ring-1 focus:ring-black"
+              className="w-full px-4 py-2 text-gray-700 bg-white border border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black"
             />
-            <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">
-              👤
-            </span>
           </div>
           <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 text-gray-700 bg-white border border-black rounded-full focus:outline-none focus:ring-1 focus:ring-black"
+              className="w-full px-4 py-2 text-gray-700 bg-white border border-black rounded-xl focus:outline-none focus:ring-1 focus:ring-black"
             />
-            <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">
-              🔒
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+            >
+              {showPassword ? (
+                <AiFillEyeInvisible size={20} />
+              ) : (
+                <AiFillEye size={20} />
+              )}
             </span>
           </div>
           {errorMessage && (
