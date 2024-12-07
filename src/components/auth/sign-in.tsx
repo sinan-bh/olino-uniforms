@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const adminUserPassword = process.env.NEXT_PUBLIC_ADMIN_USER_PASSWORD || "";
   const userName = process.env.NEXT_PUBLIC_USER_NAME || "";
   const userPassword = process.env.NEXT_PUBLIC_USER_PASSWORD || "";
-  const MId = process.env.NEXT_PUBLIC_MID || "";
+  const MId = process.env.NEXT_PUBLIC_MID || "M1";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
