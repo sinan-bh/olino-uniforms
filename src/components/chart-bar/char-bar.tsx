@@ -36,7 +36,7 @@ export function Chart() {
   return (
     <Card className="bg-gray-800 border-none h-full">
       <CardHeader>
-        <CardTitle className="text-white">Completed Works</CardTitle>
+        <CardTitle className="text-white">Monthly Revenue</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>

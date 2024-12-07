@@ -39,23 +39,33 @@ const Sidebar: React.FC = () => {
         <ul className="space-y-6">
           <li className="flex items-center space-x-2">
             <FaTachometerAlt />
-            <Link href={`/admin/home`}>Dashboard</Link>
+            <Link onClick={toggleSidebar} href={`/admin/home`}>
+              Dashboard
+            </Link>
           </li>
           <li className="flex items-center space-x-2">
             <FaTasks />
-            <Link href={`/admin/works`}>Works</Link>
+            <Link onClick={toggleSidebar} href={`/admin/works`}>
+              Works
+            </Link>
           </li>
           <li className="flex items-center space-x-2">
             <FaUsers />
-            <Link href={`/admin/profiles`}>Profiles</Link>
+            <Link onClick={toggleSidebar} href={`/admin/profiles`}>
+              Profiles
+            </Link>
           </li>
           <li className="flex items-center space-x-2">
             <FaCog />
-            <Link href={`/admin/home`}>Settings</Link>
+            <Link onClick={toggleSidebar} href={`/admin/home`}>
+              Settings
+            </Link>
           </li>
           <li className="flex items-center space-x-2">
             <CiLogout size={20} className="font-bold" />
-            <Link href={`/signin`}>Logout</Link>
+            <Link onClick={toggleSidebar} href={`/signin`}>
+              Logout
+            </Link>
           </li>
         </ul>
       </div>

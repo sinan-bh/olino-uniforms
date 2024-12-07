@@ -64,15 +64,15 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="flex flex-col md:flex-row items-center justify-center px-28 h-auto mt-32">
+      <section className="flex flex-col md:flex-row items-center justify-center px-10 h-auto ">
         <div
           ref={sectionRef}
-          className={`transition-all transform duration-1000 ${
+          className={`transition-all transform duration-1000 w-full  ${
             inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"
           }`}
         >
           <h2 className="text-3xl font-semibold text-center mb-6">About Us</h2>
-          <p className="text-lg leading-relaxed">
+          <p className="text-lg leading-relaxed max-w-full">
             Olino Uniforms is a leading manufacturer of high-quality uniforms,
             dedicated to providing comfortable and stylish apparel for
             professionals, schools, and institutions. With over a decade of

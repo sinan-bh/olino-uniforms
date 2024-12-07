@@ -26,33 +26,37 @@ const Navbar = () => {
     <nav className="bg-transparent shadow-md">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <div className="text-3xl font-bold text-green-600">
+          <div className="text-3xl font-bold text-gray-600">
             <Link href={`/M/${MId}/home`}>Logo</Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 font-bold">
             {/* <Link href="#about" className="text-gray-600 hover:text-green-600">
               About
             </Link> */}
             <Link
+              href={`/M/${MId}/home`}
+              className="text-gray-600 hover:text-gray-500"
+            >
+              Home
+            </Link>
+            <Link
               href={`/M/${MId}/works`}
-              className="text-gray-600 hover:text-green-600"
+              className="text-gray-600 hover:text-gray-500"
             >
               Works
             </Link>
             <Link
               href={`/M/${MId}/orders`}
-              className="text-gray-600 hover:text-green-600"
+              className="text-gray-600 hover:text-gray-500"
             >
               Orders
             </Link>
-            {/* <Link href="#stores" className="text-gray-600 hover:text-green-600">
+            {/* <Link href="#stores" className="text-gray-600 hover:text-gray-500">
               Stores
             </Link> */}
             <div
-              className="text-gray-600 hover:text-green-600 cursor-pointer"
+              className="text-gray-600 hover:text-gray-500 cursor-pointer"
               onClick={handleClick}
             >
               Logout
@@ -89,34 +93,34 @@ const Navbar = () => {
         >
           {/* <Link
             href="#about"
-            className="block text-gray-600 hover:text-green-600"
+            className="block text-gray-600 hover:text-gray-500"
             onClick={toggleMenu}
           >
             About
           </Link> */}
           <Link
             href={`/M/${MId}/works`}
-            className="block text-gray-600 hover:text-green-600"
+            className="block text-gray-600 hover:text-gray-500"
             onClick={toggleMenu}
           >
             Works
           </Link>
           <Link
             href={`/M/${MId}/orders`}
-            className="block text-gray-600 hover:text-green-600"
+            className="block text-gray-600 hover:text-gray-500"
             onClick={toggleMenu}
           >
             Orders
           </Link>
           {/* <Link
             href="#stores"
-            className="block text-gray-600 hover:text-green-600"
+            className="block text-gray-600 hover:text-gray-500"
             onClick={toggleMenu}
           >
             Stores
           </Link> */}
           <div
-            className="block text-gray-600 hover:text-green-600"
+            className="block text-gray-600 hover:text-gray-500"
             onClick={handleLogout}
           >
             Logout

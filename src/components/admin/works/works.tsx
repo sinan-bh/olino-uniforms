@@ -5,10 +5,10 @@ import { mockData } from "@/const/data-set";
 import Link from "next/link";
 
 const Works: React.FC = () => {
-  const [isGridView, setIsGridView] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
 
+  // Filter works based on search query and status
   const filteredWorks = mockData.filter((work) => {
     const matchesSearch = work.schoolName
       .toLowerCase()
@@ -24,12 +24,7 @@ const Works: React.FC = () => {
         Work Details
       </h1>
       <div className="flex flex-wrap justify-between items-center mb-4 mt-3">
-        <button
-          onClick={() => setIsGridView(!isGridView)}
-          className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
-        >
-          {isGridView ? "Switch to List View" : "Switch to Grid View"}
-        </button>
+        {/* Search and Filter */}
         <div className="flex items-center gap-2">
           <input
             type="text"
@@ -50,19 +45,15 @@ const Works: React.FC = () => {
           </select>
         </div>
       </div>
-      <div
-        className={`grid gap-4 ${
-          isGridView ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : ""
-        } max-h-[75vh] overflow-y-auto`}
-      >
+
+      {/* Grid View */}
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-[75vh] overflow-y-auto">
         {filteredWorks.length > 0 ? (
           filteredWorks.map((work) => (
             <Link
               href={`/admin/works/${work.id}`}
               key={work.id}
-              className={`p-4 rounded-lg ${
-                isGridView ? "bg-gray-800" : "bg-gray-800"
-              }`}
+              className="p-4 rounded-lg bg-gray-800"
             >
               <h2 className="text-lg font-medium text-white">
                 {work.schoolName}

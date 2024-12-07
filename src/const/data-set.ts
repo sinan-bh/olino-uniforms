@@ -128,7 +128,7 @@ export const users = [
     name: "Alice Johnson",
     email: "alice.johnson@example.com",
     joinDate: "2023-02-15",
-    role: "Teacher",
+    role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
     workDetails: [
@@ -151,7 +151,7 @@ export const users = [
     name: "Michael Smith",
     email: "michael.smith@example.com",
     joinDate: "2021-10-10",
-    role: "Principal",
+    role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
     workDetails: [
@@ -177,7 +177,7 @@ export const users = [
     name: "Sophia Williams",
     email: "sophia.williams@example.com",
     joinDate: "2022-05-20",
-    role: "Coordinator",
+    role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
     workDetails: [
@@ -202,7 +202,7 @@ export const users = [
     name: "James Brown",
     email: "james.brown@example.com",
     joinDate: "2020-03-12",
-    role: "Supervisor",
+    role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
     workDetails: [
@@ -225,7 +225,7 @@ export const users = [
     name: "Emma Davis",
     email: "emma.davis@example.com",
     joinDate: "2021-07-01",
-    role: "Teacher",
+    role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
     workDetails: [

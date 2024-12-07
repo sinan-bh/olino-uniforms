@@ -21,7 +21,7 @@ const AddMemberPopup: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="py-2">
       <Button
         className="bg-gray-800 hover:bg-gray-900 text-gray-400"
         variant="default"

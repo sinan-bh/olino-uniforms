@@ -53,7 +53,7 @@ const Members: React.FC = () => {
         <h1 className="text-2xl font-semibold mb-4 text-white mt-14 sm:mt-0">
           Member Profiles
         </h1>
-        <div className="flex justify-between items-center gap-4 mb-4">
+        <div className="flex items-center gap-2">
           <div>
             <AddMemberPopup />
           </div>
@@ -63,7 +63,7 @@ const Members: React.FC = () => {
               placeholder="Search by Name or Mid"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="p-2 rounded bg-gray-800 text-white placeholder-gray-400 "
+              className="w-full p-2 rounded bg-gray-800 text-white placeholder-gray-400 hover:bg-gray-900"
             />
           </div>
         </div>

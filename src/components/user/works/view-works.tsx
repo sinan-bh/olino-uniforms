@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { mockData } from "@/const/data-set";
 import AddWorkForm from "@/components/user/works/create-works";
 import PopupWrapper from "@/utils/popup-wrap";
+import Link from "next/link";
 
 const AssignedWorkPage: React.FC = () => {
   const { MId }: { MId: string } = useParams();
@@ -23,51 +24,59 @@ const AssignedWorkPage: React.FC = () => {
   };
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center py-3 h-fit">
-        <h1 className="text-2xl font-bold mb-4">Assigned Works</h1>
+    <div className="p-4 max-w-full mx-auto ">
+      <div className="flex justify-between px-6 items-center py-3">
+        <h1 className="text-3xl font-bold text-gray-600">Works</h1>
         <div
-          className="rounded-xl p-3 border bg-gray-500 text-white cursor-pointer"
+          className="rounded-xl text-nowrap p-3 font-bold bg-gray-600 text-white cursor-pointer hover:bg-gray-700 transition"
           onClick={handleOpenPopup}
         >
-          Assign New Work
+          Add Work
         </div>
       </div>
 
       {filteredWorks.length > 0 ? (
-        <table className="w-full border border-gray-300 text-left">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-2 border border-gray-300">ID</th>
-              <th className="p-2 border border-gray-300">Uniform Color</th>
-              <th className="p-2 border border-gray-300">School Name</th>
-              <th className="p-2 border border-gray-300">School Address</th>
-              <th className="p-2 border border-gray-300">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredWorks.map((work, index) => (
-              <tr key={work.id} className="hover:bg-gray-100">
-                <td className="p-2 border border-gray-300">{index + 1}</td>
-                <td className="p-2 border border-gray-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
+          {filteredWorks.map((work) => (
+            <Link
+              href={`/M/${MId}/works/${work.id}`}
+              key={work.id}
+              className="border border-gray-300 rounded-lg p-4 shadow-lg bg-[#c8bb9c] hover:bg-gray-300 transition"
+            >
+              <div className="space-y-3">
+                {/* <p className="text-lg font-semibold text-gray-700">
+                  <span className="text-gray-500">ID:</span> {index + 1}
+                </p> */}
+                <p className="text-md text-gray-800">
+                  <span className="font-semibold text-gray-500">
+                    Uniform Color:
+                  </span>{" "}
                   {work.uniformColor}
-                </td>
-                <td className="p-2 border border-gray-300">
+                </p>
+                <p className="text-md text-gray-800">
+                  <span className="font-semibold text-gray-500">
+                    School Name:
+                  </span>{" "}
                   {work.schoolName}
-                </td>
-                <td className="p-2 border border-gray-300">
+                </p>
+                <p className="text-md text-gray-800">
+                  <span className="font-semibold text-gray-500">
+                    School Address:
+                  </span>{" "}
                   {work.schoolAddress}
-                </td>
-                <td className="p-2 border border-gray-300">{work.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </p>
+                <p className="text-md text-gray-600">
+                  <span className="font-semibold text-gray-500">Status:</span>{" "}
+                  {work.status}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       ) : (
         <p className="text-gray-500">No works assigned to this member.</p>
       )}
 
-      {/* Popup Component */}
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <PopupWrapper onClose={handleClosePopup}>
