@@ -11,11 +11,13 @@ const HeroSection = () => {
       <div className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
         {/* Left side content */}
         <div className="text-center md:text-left space-y-6 max-w-lg md:max-w-xl">
-          <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-black">
             OLINO{" "}
-            <span className="text-4xl sm:text-5xl font-bold">UNIFORMS</span>
+            <span className="text-4xl sm:text-5xl font-bold text-black">
+              UNIFORMS
+            </span>
           </h1>
-          <p className="text-lg sm:text-xl">
+          <p className="text-lg sm:text-xl text-black">
             More vibrant lifestyle starts with DOO-DO! Embrace the purity of
             nature with our exquisite line of natural juices!
           </p>

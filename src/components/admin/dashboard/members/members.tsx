@@ -20,7 +20,7 @@ const MemberList: React.FC = () => {
     .slice(0, showAll ? undefined : 5);
 
   return (
-    <div className="p-4 max-w-7xl mx-auto">
+    <div className="mt-2 max-w-7xl mx-auto">
       <div className="flex justify-start mb-6">
         <input
           type="text"

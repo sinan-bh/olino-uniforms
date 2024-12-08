@@ -4,7 +4,7 @@ import About from "./home/about";
 
 export default function hero() {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Home />
       <About />
     </div>

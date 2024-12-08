@@ -44,7 +44,7 @@ const Navbar = () => {
               href={`/M/${MId}/works`}
               className="text-gray-600 hover:text-gray-500"
             >
-              Works
+              Cloths
             </Link>
             <Link
               href={`/M/${MId}/orders`}
@@ -89,7 +89,7 @@ const Navbar = () => {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } md:hidden bg-[#c8bb9c]  p-4 space-y-4 `}
+          } md:hidden   p-4 space-y-4 `}
         >
           {/* <Link
             href="#about"

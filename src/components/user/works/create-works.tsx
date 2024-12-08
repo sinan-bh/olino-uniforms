@@ -2,6 +2,21 @@
 
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
+import Image from "next/image";
+import { uniforms } from "@/const/uniform";
+
+interface FormData {
+  id: number;
+  uId: string;
+  uniformColor: string;
+  material: string;
+  schoolName: string;
+  schoolAddress: string;
+  assignedMemberId: string;
+  status: string;
+  sizes: { [key: string]: string | number };
+  orderDate: Date;
+}
 
 const schoolAddresses = [
   "123 Elm Street, Springfield",
@@ -10,19 +25,26 @@ const schoolAddresses = [
   "101 Maple Drive, Springfield",
 ];
 
+const sizes = ["Small", "Medium", "Large", "X-Large"];
+
 const AddWorkForm = () => {
-  const { MId }: { MId: string } = useParams();
-  const [formData, setFormData] = useState({
-    id: "",
+  const { MId, wId }: { MId: string; wId: string } = useParams();
+  const [formData, setFormData] = useState<FormData>({
+    id: Date.now(),
+    uId: wId,
     uniformColor: "",
     material: "",
     schoolName: "",
     schoolAddress: "",
-    assignedMemberId: { MId },
+    assignedMemberId: MId,
     status: "pending",
+    sizes: sizes.reduce((acc, size) => ({ ...acc, [size]: "" }), {}),
+    orderDate: new Date(),
   });
 
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+
+  const uniform = uniforms.find((u) => u.id.toString() === wId);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -43,6 +65,16 @@ const AddWorkForm = () => {
     }
   };
 
+  const handleSizeChange = (size: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      sizes: {
+        ...prev.sizes,
+        [size]: parseInt(value, 10) || 0,
+      },
+    }));
+  };
+
   const handleSuggestionClick = (suggestion: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -53,41 +85,47 @@ const AddWorkForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("work assigned");
+
+    const savedData = JSON.parse(localStorage.getItem("uniformOrders") || "[]");
+    savedData.push(formData);
+    localStorage.setItem("uniformOrders", JSON.stringify(savedData));
+
+    alert("Work assigned successfully!");
+    setFormData({
+      ...formData,
+      schoolName: "",
+      schoolAddress: "",
+      sizes: sizes.reduce((acc, size) => ({ ...acc, [size]: 0 }), {}),
+    });
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Add Work</h2>
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Add Work - Uniform Details</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block font-semibold">Uniform Color:</label>
-          <input
-            type="text"
-            name="uniformColor"
-            value={formData.uniformColor}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md p-2"
-            required
-          />
+        {/* Display uniform image, material, and size */}
+        <div className="mb-6">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <Image
+                src={uniform?.materialImage || ""}
+                alt={uniform?.materialName || ""}
+                width={60}
+                height={40}
+                className="h-14 object-cover"
+              />
+              <div className="ml-4">
+                <h3 className="text-gray-700 font-semibold">
+                  {uniform?.materialName || "N/A"}
+                </h3>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* School Name */}
         <div className="mb-4">
-          <label className="block font-semibold">Material:</label>
-          <select
-            name="material"
-            value={formData.material}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md p-2"
-            required
-          >
-            <option value="">Select Material</option>
-            <option value="Cotton">Cotton</option>
-            <option value="Polyester">Polyester</option>
-            <option value="Wool">Wool</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block font-semibold">School Name:</label>
+          <label className="block font-semibold mb-2">School Name:</label>
           <input
             type="text"
             name="schoolName"
@@ -97,8 +135,10 @@ const AddWorkForm = () => {
             required
           />
         </div>
+
+        {/* School Address */}
         <div className="mb-4">
-          <label className="block font-semibold">School Address:</label>
+          <label className="block font-semibold mb-2">School Address:</label>
           <input
             type="text"
             name="schoolAddress"
@@ -108,7 +148,7 @@ const AddWorkForm = () => {
             required
           />
           {filteredSuggestions.length > 0 && (
-            <ul className="border border-gray-300 mt-2 bg-white rounded-md">
+            <ul className="border border-gray-300 mt-2 bg-white rounded-md shadow-sm">
               {filteredSuggestions.map((suggestion, index) => (
                 <li
                   key={index}
@@ -121,23 +161,32 @@ const AddWorkForm = () => {
             </ul>
           )}
         </div>
-        <div className="mb-4">
-          <label className="block font-semibold">Status:</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md p-2"
-          >
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-          </select>
+
+        {/* Uniform Sizes */}
+        <div className="mb-6">
+          <label className="block font-semibold mb-2">Uniform Sizes:</label>
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+            {sizes.map((size) => (
+              <div key={size} className="flex items-center gap-2">
+                <label className="font-semibold">{size}:</label>
+                <input
+                  type="text"
+                  name={`size-${size}`}
+                  value={formData.sizes[size] || ""}
+                  onChange={(e) => handleSizeChange(size, e.target.value)}
+                  className="w-20 border border-gray-300 rounded-md p-2"
+                />
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-green-600 text-white rounded-md py-2"
+          className="w-full bg-blue-600 text-white rounded-md py-2 mt-6 hover:bg-blue-700 transition"
         >
-          Add Work
+          Assign Work
         </button>
       </form>
     </div>

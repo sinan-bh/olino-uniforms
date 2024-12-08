@@ -2,139 +2,92 @@
 
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
-import { mockData } from "@/const/data-set";
-import { FiEdit3, FiCheck } from "react-icons/fi";
+import { uniforms } from "@/const/uniform";
+import AddWorkForm from "./create-works";
 
-const WorkDetailsPage: React.FC = () => {
-  const { MId, wId }: { MId: string; wId: string } = useParams();
-  const [isEditing, setIsEditing] = useState(false);
-  const [workData, setWorkData] = useState(() => {
-    const work = mockData.find(
-      (item) => item.assignedMemberId === MId && item.id.toString() === wId
-    );
-    return work || null;
-  });
+const UniformDetailsPage: React.FC = () => {
+  const { wId }: { MId: string; wId: string } = useParams();
+  const [showPopup, setShowPopup] = useState(false);
 
-  // Handle field updates
-  const handleInputChange = (field: string, value: string) => {
-    if (workData) {
-      setWorkData({ ...workData, [field]: value });
-    }
-  };
+  const uniformData = uniforms.find((item) => item.id.toString() === wId);
 
-  // Toggle editing mode
-  const toggleEditMode = () => {
-    setIsEditing(!isEditing);
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
   };
 
   return (
-    <div className="p-6 mt-5 max-w-4xl mx-auto bg-[#ecdec4] border rounded-lg shadow-md">
-      {workData ? (
+    <div className="p-6 mt-9 max-w-4xl mx-auto  rounded-lg shadow-md">
+      {uniformData ? (
         <>
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
-              Work Details
+              Uniform Details
             </h1>
             <button
-              className="text-gray-600 hover:text-gray-800 transition"
-              onClick={toggleEditMode}
+              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition"
+              onClick={togglePopup}
             >
-              {isEditing ? (
-                <FiCheck className="text-xl" title="Save" />
-              ) : (
-                <FiEdit3 className="text-xl" title="Edit" />
-              )}
+              Order
             </button>
           </div>
+
           <div className="space-y-4 sm:space-y-6">
+            {/* Material Image */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-              <p className="text-lg">
-                <span className="font-semibold text-gray-600">
-                  School Name:
-                </span>{" "}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={workData.schoolName}
-                    onChange={(e) =>
-                      handleInputChange("schoolName", e.target.value)
-                    }
-                    className="ml-2 border rounded px-2 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                  />
-                ) : (
-                  workData.schoolName
-                )}
-              </p>
+              <img
+                src={uniformData.materialImage}
+                alt={uniformData.materialName}
+                className="w-32 h-32 object-cover rounded border"
+              />
             </div>
+
+            {/* Material Name */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+              <p>{uniformData.materialName}</p>
+            </div>
+
+            {/* Description */}
             <p className="text-lg">
-              <span className="font-semibold text-gray-600">
-                School Address:
-              </span>{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={workData.schoolAddress}
-                  onChange={(e) =>
-                    handleInputChange("schoolAddress", e.target.value)
-                  }
-                  className="ml-2 border rounded px-2 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                />
-              ) : (
-                workData.schoolAddress
-              )}
+              <span className="font-semibold text-gray-600">Description:</span>{" "}
+              {uniformData.description}
             </p>
-            <p className="text-lg">
-              <span className="font-semibold text-gray-600">
-                Uniform Color:
-              </span>{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={workData.uniformColor}
-                  onChange={(e) =>
-                    handleInputChange("uniformColor", e.target.value)
-                  }
-                  className="ml-2 border rounded px-2 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                />
-              ) : (
-                workData.uniformColor
-              )}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold text-gray-600">Status:</span>{" "}
-              {isEditing ? (
-                <select
-                  value={workData.status}
-                  onChange={(e) => handleInputChange("status", e.target.value)}
-                  className="ml-2 border rounded px-2 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="progressing">Progressing</option>
-                  <option value="completed">Completed</option>
-                </select>
-              ) : (
-                <span
-                  className={`font-semibold capitalize ${
-                    workData.status === "pending"
-                      ? "text-yellow-500"
-                      : workData.status === "completed"
-                      ? "text-green-500"
-                      : "text-blue-500"
-                  }`}
-                >
-                  {workData.status}
-                </span>
-              )}
-            </p>
+
+            {/* Sizes */}
+            <div>
+              <p className="text-lg font-semibold text-gray-600">Sizes:</p>
+              <ul className="ml-4 list-disc">
+                {Object.entries(uniformData.sizes).map(([key, value]) => (
+                  <li key={key} className="text-gray-700">
+                    <span className="font-semibold capitalize">{key}:</span>{" "}
+                    {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+
+          {/* Popup Modal */}
+          {showPopup && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded shadow-lg relative">
+                <button
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
+                  onClick={togglePopup}
+                >
+                  ✖
+                </button>
+                <AddWorkForm />
+              </div>
+            </div>
+          )}
         </>
       ) : (
         <p className="text-gray-500 text-center mt-10">
-          No work found with the specified ID.
+          No uniform found with the specified ID.
         </p>
       )}
     </div>
   );
 };
 
-export default WorkDetailsPage;
+export default UniformDetailsPage;
