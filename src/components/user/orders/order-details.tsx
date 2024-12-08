@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { uniforms } from "@/const/uniform";
 import { useParams } from "next/navigation";
+import { format } from "date-fns";
 
 interface OrderData {
   id: number;
@@ -122,7 +123,7 @@ const OrderDetails = () => {
           <h3 className="font-semibold text-lg">Order Date</h3>
           <p>
             {order?.orderDate &&
-              new Date(order?.orderDate).toLocaleDateString()}
+              format(new Date(order?.orderDate), "dd-MM-yyyy")}
           </p>
         </div>
         <div>

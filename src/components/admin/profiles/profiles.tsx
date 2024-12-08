@@ -5,15 +5,6 @@ import { users } from "@/const/data-set";
 import AddMemberPopup from "./add-members";
 import Link from "next/link";
 
-interface WorkDetail {
-  workId: number;
-  schoolName: string;
-  status: string;
-  shippedDate?: string;
-  deliveredDate?: string;
-  creditedAmount?: string;
-}
-
 interface MemberDetails {
   id: number;
   memberId: string;
@@ -21,8 +12,8 @@ interface MemberDetails {
   email: string;
   role: string;
   profileImage: string;
-  workDetails: WorkDetail[];
-  isBlocked: boolean;
+  joinDate: string;
+  isBlocked?: boolean;
 }
 
 const Members: React.FC = () => {
@@ -76,16 +67,17 @@ const Members: React.FC = () => {
                 <h2 className="text-lg font-medium text-white">
                   {member.name}
                 </h2>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-400 text-sm py-1">
                   <strong>Mid:</strong> {member.memberId}
                 </p>
-                <p className="text-gray-400 text-sm">
-                  <strong>Work Assigned:</strong>{" "}
-                  {member.workDetails.length > 0
-                    ? member.workDetails
-                        .map((work) => work.schoolName)
-                        .join(", ")
-                    : "No work assigned"}
+                <p className="text-gray-400 text-sm py-1">
+                  <strong>E-Mail:</strong> {member.email}
+                </p>
+                <p className="text-gray-400 text-sm py-1">
+                  <strong>Role:</strong> {member.role}
+                </p>
+                <p className="text-gray-400 text-sm py-1">
+                  <strong>Join Date:</strong> {member.joinDate}
                 </p>
               </Link>
               <button

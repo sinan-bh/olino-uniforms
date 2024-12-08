@@ -2,25 +2,40 @@
 
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Navbar = () => {
   const { MId }: { MId: string } = useParams();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const handleClick = () => {
-    alert("Logout successfully");
-    router.push(`/signin`);
-  };
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const handleLogout = () => {
     alert("Logout successfully");
-    toggleMenu();
+    setIsMenuOpen(false);
     router.push(`/signin`);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        toggleButtonRef.current &&
+        !toggleButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-transparent shadow-md">
@@ -31,9 +46,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex space-x-8 font-bold">
-            {/* <Link href="#about" className="text-gray-600 hover:text-green-600">
-              About
-            </Link> */}
             <Link
               href={`/M/${MId}/home`}
               className="text-gray-600 hover:text-gray-500"
@@ -52,12 +64,9 @@ const Navbar = () => {
             >
               Orders
             </Link>
-            {/* <Link href="#stores" className="text-gray-600 hover:text-gray-500">
-              Stores
-            </Link> */}
             <div
               className="text-gray-600 hover:text-gray-500 cursor-pointer"
-              onClick={handleClick}
+              onClick={handleLogout}
             >
               Logout
             </div>
@@ -65,6 +74,7 @@ const Navbar = () => {
 
           <div className="md:hidden flex items-center">
             <button
+              ref={toggleButtonRef}
               onClick={toggleMenu}
               className="text-gray-600 focus:outline-none"
             >
@@ -86,41 +96,38 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Dropdown Box */}
         <div
-          className={`${
-            isMenuOpen ? "block" : "hidden"
-          } md:hidden   p-4 space-y-4 `}
+          ref={dropdownRef}
+          className={`absolute top-17 right-5 bg-blue-200 shadow-lg rounded-md p-4 w-48 z-50 transition-all duration-500 ease-in ${
+            isMenuOpen
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95 pointer-events-none"
+          }`}
         >
-          {/* <Link
-            href="#about"
-            className="block text-gray-600 hover:text-gray-500"
-            onClick={toggleMenu}
+          <Link
+            href={`/M/${MId}/home`}
+            className="block text-gray-600 hover:text-gray-500 py-2"
+            onClick={() => setIsMenuOpen(false)}
           >
-            About
-          </Link> */}
+            Home
+          </Link>
           <Link
             href={`/M/${MId}/works`}
-            className="block text-gray-600 hover:text-gray-500"
-            onClick={toggleMenu}
+            className="block text-gray-600 hover:text-gray-500 py-2"
+            onClick={() => setIsMenuOpen(false)}
           >
-            Works
+            Cloths
           </Link>
           <Link
             href={`/M/${MId}/orders`}
-            className="block text-gray-600 hover:text-gray-500"
-            onClick={toggleMenu}
+            className="block text-gray-600 hover:text-gray-500 py-2"
+            onClick={() => setIsMenuOpen(false)}
           >
             Orders
           </Link>
-          {/* <Link
-            href="#stores"
-            className="block text-gray-600 hover:text-gray-500"
-            onClick={toggleMenu}
-          >
-            Stores
-          </Link> */}
           <div
-            className="block text-gray-600 hover:text-gray-500"
+            className="block text-gray-600 hover:text-gray-500 py-2 cursor-pointer"
             onClick={handleLogout}
           >
             Logout

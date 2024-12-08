@@ -121,6 +121,18 @@ export const mockData: Work[] = [
   },
 ];
 
+export type User =
+  | {
+      name: string;
+      email: string;
+      memberId?: string;
+      joinDate: string;
+      role: string;
+      profileImage?: string;
+      isBlocked?: boolean;
+    }
+  | undefined;
+
 export const users = [
   {
     id: 1,
@@ -131,19 +143,6 @@ export const users = [
     role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
-    workDetails: [
-      {
-        workId: 1,
-        schoolName: "Greenwood High School",
-        status: "Shipped",
-        shippedDate: "2023-09-10",
-      },
-      {
-        workId: 2,
-        schoolName: "Springfield Elementary",
-        status: "Pending",
-      },
-    ],
   },
   {
     id: 2,
@@ -154,22 +153,6 @@ export const users = [
     role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
-    workDetails: [
-      {
-        workId: 6,
-        schoolName: "Blue Ridge Academy",
-        status: "Delivered",
-        shippedDate: "2023-09-08",
-        deliveredDate: "2023-09-15",
-        creditedAmount: "$1000",
-      },
-      {
-        workId: 7,
-        schoolName: "Riverside Secondary School",
-        status: "Shipped",
-        shippedDate: "2023-09-11",
-      },
-    ],
   },
   {
     id: 3,
@@ -180,21 +163,6 @@ export const users = [
     role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
-    workDetails: [
-      {
-        workId: 3,
-        schoolName: "Oakwood Academy",
-        status: "Delivered",
-        shippedDate: "2023-08-05",
-        deliveredDate: "2023-08-10",
-        creditedAmount: "$750",
-      },
-      {
-        workId: 4,
-        schoolName: "Sunnydale High School",
-        status: "Pending",
-      },
-    ],
   },
   {
     id: 4,
@@ -205,19 +173,6 @@ export const users = [
     role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
-    workDetails: [
-      {
-        workId: 5,
-        schoolName: "Hillcrest Secondary School",
-        status: "Shipped",
-        shippedDate: "2023-09-12",
-      },
-      {
-        workId: 8,
-        schoolName: "Willow Creek Academy",
-        status: "Pending",
-      },
-    ],
   },
   {
     id: 5,
@@ -228,15 +183,5 @@ export const users = [
     role: "member",
     profileImage: "https://via.placeholder.com/150",
     isBlocked: false,
-    workDetails: [
-      {
-        workId: 9,
-        schoolName: "Lakeside High School",
-        status: "Delivered",
-        shippedDate: "2023-08-20",
-        deliveredDate: "2023-08-25",
-        creditedAmount: "$500",
-      },
-    ],
   },
 ];

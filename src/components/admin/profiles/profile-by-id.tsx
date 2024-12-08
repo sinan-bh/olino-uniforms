@@ -4,11 +4,6 @@ import React from "react";
 import { users } from "@/const/data-set";
 import { useParams } from "next/navigation";
 
-interface WorkDetail {
-  schoolName: string;
-  status: "Shipped" | "Delivered" | "Pending";
-}
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ProfileProps {
   user: {
@@ -18,20 +13,10 @@ interface ProfileProps {
     role: string;
     profileImage: string;
   };
-  workDetails: WorkDetail[];
 }
 
 const Profile: React.FC = () => {
   const { profileId }: { profileId: string } = useParams();
-
-  const statusStyles: Record<"Shipped" | "Delivered" | "Pending", string> = {
-    Shipped: "bg-yellow-500 text-black",
-    Delivered: "bg-green-500 text-white",
-    Pending: "bg-red-500 text-white",
-  };
-
-  console.log(profileId);
-
   const user = users.find((u) => u.memberId === profileId);
   console.log(user);
 
@@ -56,29 +41,6 @@ const Profile: React.FC = () => {
 
         <div className="mt-6">
           <h2 className="text-xl font-semibold mb-4">Work Details</h2>
-          <div className="space-y-4">
-            {user?.workDetails?.map((work, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center p-4 rounded-lg bg-gray-800"
-              >
-                <div>
-                  <p className="text-lg font-medium">{work.schoolName}</p>
-                </div>
-                <div>
-                  <span
-                    className={`px-4 py-1 rounded-full text-sm font-semibold ${
-                      statusStyles[
-                        work.status as "Shipped" | "Delivered" | "Pending"
-                      ]
-                    }`}
-                  >
-                    {work.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

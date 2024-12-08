@@ -1,8 +1,8 @@
-interface Sizes {
-  small: number;
-  medium: number;
-  large: number;
-  extraLarge: number;
+export interface Sizes {
+  small: number | string;
+  medium: number | string;
+  large: number | string;
+  extraLarge: number | string;
 }
 
 export interface Uniform {

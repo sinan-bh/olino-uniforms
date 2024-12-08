@@ -12,10 +12,7 @@ const MemberList: React.FC = () => {
       (user) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.memberId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.workDetails.some((work) =>
-          work.schoolName.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, showAll ? undefined : 5);
 
@@ -25,7 +22,7 @@ const MemberList: React.FC = () => {
         <input
           type="text"
           placeholder="Search users"
-          className="px-4 py-2 bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none text-white max-w-full max-w-md"
+          className="px-4 py-2 bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none text-white max-w-full "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -37,7 +34,7 @@ const MemberList: React.FC = () => {
             key={user.id}
             className="p-4 bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition"
           >
-            <div className="flex flex-col items-start ">
+            <div className="flex flex-col items-start justify-around">
               <div className="flex items-center w-full py-2">
                 <div className="w-10 h-10 font-bold text-4xl flex justify-center items-center bg-gray-500 text-black rounded-full overflow-hidden border-2 border-gray-500">
                   {user.name[0]}
@@ -47,16 +44,17 @@ const MemberList: React.FC = () => {
                   {user.name}
                 </div>
               </div>
-              <div className="text-sm text-gray-400">ID: {user.memberId}</div>
-              <div className="text-sm text-gray-400">Email: {user.email}</div>
-
-              <div className="mt-2 text-sm text-gray-300">
-                <strong>Schools:</strong>
-                <ul className="list-disc ml-4">
-                  {user.workDetails.map((work) => (
-                    <li key={work.workId}>{work.schoolName}</li>
-                  ))}
-                </ul>
+              <div className="text-sm text-gray-400 py-1 text-nowrap">
+                ID: {user.memberId}
+              </div>
+              <div className="text-sm text-gray-400 py-1 text-nowrap">
+                Email: {user.email}
+              </div>
+              <div className="text-sm text-gray-400 py-1 text-nowrap">
+                Role: {user.role}
+              </div>
+              <div className="text-sm text-gray-400 py-1 text-nowrap">
+                Join Date: {user.joinDate}
               </div>
             </div>
           </div>

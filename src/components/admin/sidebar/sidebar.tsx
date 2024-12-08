@@ -8,6 +8,7 @@ import {
   FaUsers,
   FaCog,
   FaBars,
+  FaShoppingCart,
 } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 
@@ -53,6 +54,12 @@ const Sidebar: React.FC = () => {
             <FaUsers />
             <Link onClick={toggleSidebar} href={`/admin/profiles`}>
               Profiles
+            </Link>
+          </li>
+          <li className="flex items-center space-x-2">
+            <FaShoppingCart />
+            <Link onClick={toggleSidebar} href={`/admin/orders`}>
+              Orders
             </Link>
           </li>
           <li className="flex items-center space-x-2">
