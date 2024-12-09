@@ -1,24 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { users } from "@/const/data-set";
 import { useParams } from "next/navigation";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface ProfileProps {
-  user: {
-    name: string;
-    email: string;
-    joinDate: string;
-    role: string;
-    profileImage: string;
-  };
+interface OrderData {
+  id: number;
+  uId: string;
+  material: string;
+  schoolName: string;
+  schoolAddress: string;
+  assignedMemberId: string;
+  status: string;
+  sizes: { [key: string]: number };
+  orderDate: string | null;
+  image: string;
 }
 
 const Profile: React.FC = () => {
   const { profileId }: { profileId: string } = useParams();
   const user = users.find((u) => u.memberId === profileId);
-  console.log(user);
+  const [orders, setOrders] = useState<OrderData[] | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchOrders = () => {
+      const ordersDetails = JSON.parse(
+        localStorage.getItem("uniformOrders") || "[]"
+      );
+      const currentOrders = ordersDetails.filter(
+        (order: OrderData) => order.assignedMemberId === profileId
+      );
+      setOrders(currentOrders);
+    };
+    fetchOrders();
+  }, [profileId]);
 
   return (
     <div className="text-white flex justify-center items-center">
@@ -41,6 +56,33 @@ const Profile: React.FC = () => {
 
         <div className="mt-6">
           <h2 className="text-xl font-semibold mb-4">Work Details</h2>
+          {orders?.length ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {orders.map((order) => (
+                <div
+                  key={order.id}
+                  className="bg-gray-700 p-4 rounded-lg shadow-lg"
+                >
+                  <h3 className="mt-2 text-lg font-bold">{order.schoolName}</h3>
+                  <p className="text-gray-400">{order.schoolAddress}</p>
+                  <p className="text-gray-400">
+                    <strong>Status:</strong> {order.status}
+                  </p>
+                  <p className="text-gray-400">
+                    <strong>Order Date:</strong> {order.orderDate || "N/A"}
+                  </p>
+                  <p className="text-gray-400">
+                    <strong>Sizes:</strong>{" "}
+                    {Object.entries(order.sizes)
+                      .map(([size, qty]) => `${size}: ${qty}`)
+                      .join(", ")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-400">No orders assigned to this member.</p>
+          )}
         </div>
       </div>
     </div>

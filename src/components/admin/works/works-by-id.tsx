@@ -66,6 +66,7 @@ const WorkDetails = () => {
             alt={uniform?.materialName || ""}
             width={100}
             height={100}
+            className="h-16"
           />
         </div>
         <p className="mb-2 mt-2">

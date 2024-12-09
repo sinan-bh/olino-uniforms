@@ -47,8 +47,6 @@ const OrderedList = () => {
     setFilteredOrders(filtered);
   };
 
-  console.log(filteredOrders);
-
   // Handle sorting by ordered date (ascending and descending)
   // const handleSortChange = () => {
   //   const sortedOrders = [...filteredOrders].sort((a, b) => {
